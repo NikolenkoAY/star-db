@@ -12,13 +12,21 @@ import "./app.css";
 export default class App extends Component {
   render() {
     return (
-      <div>
-        <h1>App</h1>
+      <div className="container">
         <Header />
-        <ItemList />
-        <PersonDetails />
-        <PlanetDetails />
         <RandomPlanet />
+
+        <div className="row mb2">
+          <div className="col-md-6">
+            <ItemList />
+          </div>
+          <div className="col-md-6">
+            <PersonDetails />
+          </div>
+        </div>
+
+
+        <PlanetDetails />
         <StarshipDetails />
       </div>
     );

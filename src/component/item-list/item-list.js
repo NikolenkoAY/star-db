@@ -1,13 +1,22 @@
-import React from "react";
+import React, { Component } from 'react';
 
-import "./item-list.css";
+import './item-list.css';
 
-const ItemList = () => {
-  return (
-    <div className="item-list">
-      <h1>ItemList</h1>
-    </div>
-  );
-};
+export default class ItemList extends Component {
 
-export default ItemList;
+  render() {
+    return (
+      <ul className="item-list list-group">
+        <li className="list-group-item">
+          Luke Skywalker
+        </li>
+        <li className="list-group-item">
+          Darth Vader
+        </li>
+        <li className="list-group-item">
+          R2-D2
+        </li>
+      </ul>
+    );
+  }
+}
