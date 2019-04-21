@@ -1,6 +1,7 @@
 .random-planet {
   display: flex;
   padding: 1rem;
+  margin-bottom: 0px;
 }
 
 .random-planet .planet-image {
@@ -21,13 +22,3 @@
 .random-planet .list-group-item .term {
   margin-right: 0.5rem;
 }
-/*
-.error-indicator {
-  margin: 0 auto;
-}
-.error-indicator .boom {
-  font-size: 18px;
-  font-weight: 900;
-  margin: 0 3px;
-}
-*/
