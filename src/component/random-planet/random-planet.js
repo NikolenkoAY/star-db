@@ -9,8 +9,8 @@ import "./random-planet.css";
 export default class RandomPlanet extends Component {
   swapiSevice = new SwapiSevice();
 
-  constructor() {
-    super();
+  componentDidMount() {
+
     this.updatePlanet();
     setInterval(this.updatePlanet, 2000);
   }
