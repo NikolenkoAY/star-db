@@ -1,54 +1,54 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 import SwapiSevice from "../../services/swapi-services";
 
-import './item-list.css';
-import Spinner from '../spinner';
-
+import "./item-list.css";
+import Spinner from "../spinner";
 
 export default class ItemList extends Component {
-
   swapiSevice = new SwapiSevice();
 
   state = {
-    peopleList: null,
+    peopleList: null
+  };
+
+  componentDidMount() {
+    this.swapiSevice.getAllPeople().then(peopleList => {
+      this.setState({
+        peopleList
+      });
+    });
   }
 
-  componentDidMount(){
-    this.swapiSevice
-      .getAllPeople()
-      .then((peopleList)=>{
-        this.setState({
-          peopleList
-        });
-      })
-     
-  }
+  onError = err => {
+    console.log("error" + err);
+  };
 
-  onError = (err)=>{
-    console.log("error" + err)
-  }
+  renderItems = peopleList => {
+    return peopleList.map(person => {
+      return (
+        <li
+          className="list-group-item"
+          key={person.id}
+          onClick={() => this.props.onPersonSelected(person.id)}
+        >
+          {person.name}
+        </li>
+      );
+    });
+  };
 
   render() {
+    const { peopleList } = this.state;
 
-    const {peopleList}=this.state;
-
-    if (!peopleList){
-      return <Spinner/>
+    if (!peopleList) {
+      return <Spinner />;
     }
 
+    const item = this.renderItems(peopleList);
+
     return (
-      <ul className="item-list list-group">
-        <li className="list-group-item">
-          Luke Skywalker
-        </li>
-        <li className="list-group-item">
-          Darth Vader
-        </li>
-        <li className="list-group-item">
-          R2-D2
-        </li>
-      </ul>
+      <ul className="item-list list-group">{this.renderItems(peopleList)}</ul>
     );
   }
 }
