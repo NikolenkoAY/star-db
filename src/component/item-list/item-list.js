@@ -45,8 +45,6 @@ export default class ItemList extends Component {
       return <Spinner />;
     }
 
-    const item = this.renderItems(peopleList);
-
     return (
       <ul className="item-list list-group">{this.renderItems(peopleList)}</ul>
     );

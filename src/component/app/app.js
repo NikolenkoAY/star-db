@@ -31,11 +31,11 @@ export default class App extends Component {
             <ItemList onPersonSelected={this.onPersonSelected} />
           </div>
           <div className="col-md-6">
-            <PersonDetails />
+            <PersonDetails personId={this.state.selectedPerson} />
           </div>
         </div>
 
-        <PlanetDetails personId={this.state.selectedPerson} />
+        <PlanetDetails />
         <StarshipDetails />
       </div>
     );
