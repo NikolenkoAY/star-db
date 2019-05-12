@@ -39,7 +39,6 @@ export default class RandomPlanet extends Component {
   };
 
   updatePlanet = () => {
-    console.log("unmount");
     const id = Math.floor(Math.random() * 20) + 2;
     this.swapiSevice
       .getPlanet(id)
