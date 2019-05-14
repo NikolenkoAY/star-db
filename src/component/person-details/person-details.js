@@ -57,6 +57,7 @@ const PersonDetailsView = ({ person }) => {
   return (
     <React.Fragment>
       <img
+        alt="person"
         className="person-image"
         src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`}
       />

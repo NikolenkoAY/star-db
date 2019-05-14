@@ -25,13 +25,8 @@ export default class App extends Component {
     return (
       <div className="container">
         <Header />
-
         <RandomPlanet />
-
         <PeoplePage />
-        <PeoplePage />
-        <PeoplePage />
-
         <PlanetDetails />
         <StarshipDetails />
       </div>
