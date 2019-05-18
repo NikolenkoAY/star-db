@@ -36,18 +36,27 @@ export default class App extends Component {
         <div className="row mb2">
           <div className="col-md-6">
             <ItemList
-              onPersonSelected={this.onPersonSelected}
+              onPersonSelected={e => null}
               getData={this.swapiService.getAllPlanets}
+              renderItem={({ name, population }) => (
+                <span>
+                  {name} {population}{" "}
+                </span>
+              )}
             />
           </div>
-          <div className="col-md-6  ">
-            {this.state.hasError ? (
-              <ErrorIndicator />
-            ) : (
-              <PersonDetails personId={this.state.selectedPerson} />
-            )}
+        </div>
+
+        <div className="row mb2">
+          <div className="col-md-6">
+            <ItemList
+              onPersonSelected={e => null}
+              getData={this.swapiService.getAllStarships}
+              renderItem={({ name, model }) => `${name} - ${model} `}
+            />
           </div>
         </div>
+
         <PlanetDetails />
         <StarshipDetails />
       </div>
