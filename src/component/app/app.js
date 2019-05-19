@@ -17,7 +17,6 @@ export default class App extends Component {
     hasError: false
   };
   componentDidCatch() {
-    console.log("as");
     this.setState({ hasError: true });
   }
 

@@ -4,21 +4,18 @@ import ItemList from "../item-list";
 import PersonDetails from "../person-details/person-details";
 
 import "./people-page.css";
-import ErrorIndicator from "../error-indicator";
+
 import SwapiService from "../../services/swapi-services";
 import Row from "../row";
+
+import ErrorBoundry from "../error-boundry";
 
 export default class PeoplePage extends Component {
   swapiService = new SwapiService();
 
   state = {
-    selectedPerson: null,
-    error: false
+    selectedPerson: null
   };
-
-  componentDidCatch() {
-    this.setState({ hasError: true });
-  }
 
   onPersonSelected = id => {
     this.setState({
@@ -26,19 +23,18 @@ export default class PeoplePage extends Component {
     });
   };
   render() {
-    if (this.state.hasError) {
-      return <ErrorIndicator />;
-    }
-
     const itemList = (
       <ItemList
         onPersonSelected={this.onPersonSelected}
         getData={this.swapiService.getAllPeople}
-        renderItem={({ name, birthYear }) => `${name}-${birthYear}`}
-      />
+      >
+        {e => `${e.name}-${e.birthYear}`}
+      </ItemList>
     );
     const personDetails = (
-      <PersonDetails personId={this.state.selectedPerson} />
+      <ErrorBoundry>
+        <PersonDetails personId={this.state.selectedPerson} />
+      </ErrorBoundry>
     );
     return <Row left={itemList} right={personDetails} />;
   }
