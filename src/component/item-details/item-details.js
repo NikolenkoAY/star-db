@@ -1,64 +1,64 @@
 import React, { Component } from "react";
 
-import "./person-details.css";
+import "./item-details.css";
 import SwapiService from "../../services/swapi-services";
 import Spinner from "../spinner";
 import ErrorButton from "../error-button";
 
-export default class PersonDetails extends Component {
+export default class ItemDetails extends Component {
   swapiService = new SwapiService();
 
   state = {
-    person: null,
+    item: null,
     updating: false
   };
 
   componentDidMount() {
-    this.updatePerson();
+    this.updateItem();
   }
   componentDidUpdate(prevProps) {
-    if (this.props.personId === prevProps.personId) {
+    if (this.props.itemId === prevProps.itemId) {
     } else {
       this.setState({ updating: true });
-      this.updatePerson();
+      this.updateItem();
     }
   }
 
-  updatePerson = () => {
-    const { personId } = this.props;
-    if (!personId) {
+  updateItem = () => {
+    const { itemId } = this.props;
+    if (!itemId) {
       return;
     }
-    this.swapiService.getPersone(personId).then(person => {
-      this.setState({ person });
+    this.swapiService.getPersone(itemId).then(item => {
+      this.setState({ item });
       this.setState({ updating: false });
     });
   };
 
   render() {
-    const { person, updating } = this.state;
+    const { item, updating } = this.state;
     if (updating) {
       return <Spinner />;
     }
     return (
-      <div className="person-details card">
-        {person ? (
-          <PersonDetailsView person={person} />
+      <div className="item-details card">
+        {item ? (
+          <ItemDetailsView item={item} />
         ) : (
-          <span>Select a person</span>
+          <span>Select a item</span>
         )}
       </div>
     );
   }
 }
 
-const PersonDetailsView = ({ person }) => {
-  const { id, name, gender, birthYear, eyeColor } = person;
+const ItemDetailsView = ({ item }) => {
+  const { id, name, gender, birthYear, eyeColor } = item;
   return (
     <React.Fragment>
       <img
-        alt="person"
-        className="person-image"
+        alt="item"
+        className="item-image"
         src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`}
       />
 

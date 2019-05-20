@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import ItemList from "../item-list";
-import PersonDetails from "../person-details/person-details";
+import ItemDetails from "../item-details";
 
 import "./people-page.css";
 
@@ -14,28 +14,28 @@ export default class PeoplePage extends Component {
   swapiService = new SwapiService();
 
   state = {
-    selectedPerson: null
+    selectedItem: null
   };
 
-  onPersonSelected = id => {
+  onItemSelected = id => {
     this.setState({
-      selectedPerson: id
+      selectedItem: id
     });
   };
   render() {
     const itemList = (
       <ItemList
-        onPersonSelected={this.onPersonSelected}
+        onItemSelected={this.onItemSelected}
         getData={this.swapiService.getAllPeople}
       >
         {e => `${e.name}-${e.birthYear}`}
       </ItemList>
     );
-    const personDetails = (
+    const itemDetails = (
       <ErrorBoundry>
-        <PersonDetails personId={this.state.selectedPerson} />
+        <ItemDetails itemId={this.state.selectedItem} />
       </ErrorBoundry>
     );
-    return <Row left={itemList} right={personDetails} />;
+    return <Row left={itemList} right={itemDetails} />;
   }
 }
