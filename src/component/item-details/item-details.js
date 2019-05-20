@@ -25,14 +25,16 @@ export default class ItemDetails extends Component {
   }
 
   updateItem = () => {
-    const { itemId } = this.props;
+    const { itemId, getData } = this.props;
     if (!itemId) {
       return;
     }
-    this.swapiService.getPersone(itemId).then(item => {
-      this.setState({ item });
-      this.setState({ updating: false });
-    });
+
+    getData(itemId)
+      .then(item => {
+        this.setState({ item });
+        this.setState({ updating: false });
+      });
   };
 
   render() {
@@ -45,8 +47,8 @@ export default class ItemDetails extends Component {
         {item ? (
           <ItemDetailsView item={item} />
         ) : (
-          <span>Select a item</span>
-        )}
+            <span>Select a item</span>
+          )}
       </div>
     );
   }
