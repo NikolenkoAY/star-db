@@ -10,7 +10,8 @@ export default class ItemDetails extends Component {
 
   state = {
     item: null,
-    updating: false
+    updating: false,
+    image: null
   };
 
   componentDidMount() {
@@ -25,44 +26,40 @@ export default class ItemDetails extends Component {
   }
 
   updateItem = () => {
-    const { itemId, getData } = this.props;
+    const { itemId, getData, getImageURL } = this.props;
+
     if (!itemId) {
       return;
     }
-
-    getData(itemId)
-      .then(item => {
-        this.setState({ item });
-        this.setState({ updating: false });
-      });
+    getData(itemId).then(item => {
+      this.setState({ item, image: getImageURL(item), updating: false });
+    });
   };
 
   render() {
-    const { item, updating } = this.state;
+    const { item, updating, image } = this.state;
+
     if (updating) {
       return <Spinner />;
     }
     return (
       <div className="item-details card">
         {item ? (
-          <ItemDetailsView item={item} />
+          <ItemDetailsView item={item} image={image} />
         ) : (
-            <span>Select a item</span>
-          )}
+          <span>Select a item</span>
+        )}
       </div>
     );
   }
 }
 
-const ItemDetailsView = ({ item }) => {
-  const { id, name, gender, birthYear, eyeColor } = item;
+const ItemDetailsView = ({ item, image }) => {
+  const { name, gender, birthYear, eyeColor } = item;
+
   return (
     <React.Fragment>
-      <img
-        alt="item"
-        className="item-image"
-        src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`}
-      />
+      <img alt="item" className="item-image" src={image} />
 
       <div className="card-body">
         <h4>{name}</h4>

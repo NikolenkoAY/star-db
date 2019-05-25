@@ -27,6 +27,7 @@ export default class PeoplePage extends Component {
       <ItemList
         onItemSelected={this.onItemSelected}
         getData={this.swapiService.getAllPeople}
+        renderItem={e => `${e.name}-${e.birthYear}`} //можно рендер, а можно ниже, как чилдрен
       >
         {e => `${e.name}-${e.birthYear}`}
       </ItemList>

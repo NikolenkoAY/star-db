@@ -28,24 +28,35 @@ export default class App extends Component {
       return <ErrorIndicator />;
     }
 
-    const personDetails=(
-      <ItemDetails itemId={11}
-      getData={this.swapiService.getPerson}/>
-    )
+    const {
+      getPerson,
+      getStarship,
+      getPersonImage,
+      getStarshipImage
+    } = this.swapiService;
+
+    const personDetails = (
+      <ItemDetails
+        itemId={11}
+        getData={getPerson}
+        getImageURL={getPersonImage}
+      />
+    );
 
     const starshipDetails = (
-      <ItemDetails itemId={5}
-      getData= {this.swapiService.getStarship} />
-    )
-      
+      <ItemDetails
+        itemId={5}
+        getData={getStarship}
+        getImageURL={getStarshipImage}
+      />
+    );
+
     return (
       <div className="container">
-      <ErrorBoundry>
-        <Header />
-        
-        <Row left={personDetails} right={starshipDetails}/>
+        <ErrorBoundry>
+          <Header />
 
- 
+          <Row left={personDetails} right={starshipDetails} />
         </ErrorBoundry>
       </div>
     );

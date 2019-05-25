@@ -6,6 +6,7 @@ export default class SwapiService {
     if (!res.ok) {
       throw new Error(`Cold not fetch ${url}, recevide ${res.status}`);
     }
+
     return await res.json();
   };
 
@@ -16,6 +17,7 @@ export default class SwapiService {
 
   getPerson = async id => {
     const person = await this.getResource(`/people/${id}`);
+
     return this._transformPerson(person);
   };
 
@@ -37,6 +39,16 @@ export default class SwapiService {
   getStarship = async id => {
     const starship = await this.getResource(`/starships/${id}`);
     return this._transformStarship(starship);
+  };
+
+  getPersonImage = ({ id }) => {
+    return `https://starwars-visualguide.com/assets/img/characters/${id}.jpg`;
+  };
+  getPlanetImage = ({ id }) => {
+    return `https://starwars-visualguide.com/assets/img/planets/${id}.jpg`;
+  };
+  getStarshipImage = ({ id }) => {
+    return `https://starwars-visualguide.com/assets/img/starships/${id}.jpg`;
   };
 
   _extractId = item => {
