@@ -38,7 +38,7 @@ export default class App extends Component {
     const personDetails = (
       <ItemDetails itemId={11} getData={getPerson} getImageURL={getPersonImage}>
         <Record field="gender" label="Gender" />
-        <Record field="eyeColor" label="Eye Color" />{" "}
+        <Record field="birthYear" label="Birth Year" />
       </ItemDetails>
     );
 
@@ -47,7 +47,11 @@ export default class App extends Component {
         itemId={5}
         getData={getStarship}
         getImageURL={getStarshipImage}
-      />
+      >
+        <Record field="model" label="Model" />
+        <Record field="length" label="Length" />
+        <Record field="costInCredits" label="Cost" />
+      </ItemDetails>
     );
 
     return (

@@ -39,7 +39,11 @@ export default class ItemDetails extends Component {
   render() {
     const { item, updating, image } = this.state;
     if (!item) {
-      return <span>Select a item from a list</span>;
+      return (
+        <div className="item-details card">
+          <h4>Select a item from a list</h4>
+        </div>
+      );
     }
     if (updating) {
       return <Spinner />;
@@ -53,7 +57,7 @@ export default class ItemDetails extends Component {
           <h4>{name}</h4>
           <ul className="list-group list-group-flush">
             {React.Children.map(this.props.children, (child, idx) => {
-              return <li>{idx}</li>;
+              return React.cloneElement(child, { item });
             })}
           </ul>
           <ErrorButton />
@@ -67,7 +71,7 @@ const Record = ({ item, field, label }) => {
   return (
     <li className="list-group-item">
       <span className="term">{label}</span>
-      <span>{field}</span>
+      <span>{item[field]}</span>
     </li>
   );
 };
