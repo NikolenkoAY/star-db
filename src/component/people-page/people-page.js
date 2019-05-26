@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import ItemList from "../item-list";
-import ItemDetails from "../item-details";
+import ItemDetails, { Record } from "../item-details";
 
 import "./people-page.css";
 
@@ -14,7 +14,8 @@ export default class PeoplePage extends Component {
   swapiService = new SwapiService();
 
   state = {
-    selectedItem: null
+    selectedItem: null,
+    selectedItemS: null
   };
 
   onItemSelected = id => {
@@ -22,21 +23,60 @@ export default class PeoplePage extends Component {
       selectedItem: id
     });
   };
+  onItemSelectedS = id => {
+    this.setState({
+      selectedItemS: id
+    });
+  };
   render() {
     const itemList = (
       <ItemList
         onItemSelected={this.onItemSelected}
-        getData={this.swapiService.getAllPeople}
         renderItem={e => `${e.name}-${e.birthYear}`} //можно рендер, а можно ниже, как чилдрен
       >
-        {e => `${e.name}-${e.birthYear}`}
+        {e => e.name}
       </ItemList>
     );
+
     const itemDetails = (
       <ErrorBoundry>
-        <ItemDetails itemId={this.state.selectedItem} />
+        <ItemDetails
+          itemId={this.state.selectedItem}
+          getData={this.swapiService.getPerson}
+          getImageURL={this.swapiService.getPersonImage}
+        >
+          <Record field="gender" label="Gender" />
+          <Record field="birthYear" label="Birth Year" />
+        </ItemDetails>
       </ErrorBoundry>
     );
-    return <Row left={itemList} right={itemDetails} />;
+    /*
+    const starshipList = (
+      <ItemList
+        onItemSelected={this.onItemSelectedS}
+        getData={this.swapiService.getAllStarships}
+        renderItem={e => `${e.name}-${e.birthYear}`} //можно рендер, а можно ниже, как чилдрен
+      >
+        {({ name }) => name}
+      </ItemList>
+    );
+
+    const starshipDetails = (
+      <ItemDetails
+        itemId={this.state.selectedItemS}
+        getData={this.swapiService.getStarship}
+        getImageURL={this.swapiService.getStarshipImage}
+      >
+        <Record field="model" label="Model" />
+        <Record field="length" label="Length" />
+        <Record field="costInCredits" label="Cost" />
+      </ItemDetails>
+    );
+*/
+    return (
+      <div>
+        <Row left={itemList} right={itemDetails} />
+      </div>
+    );
   }
 }

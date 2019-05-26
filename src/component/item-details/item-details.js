@@ -21,6 +21,7 @@ export default class ItemDetails extends Component {
     if (this.props.itemId === prevProps.itemId) {
     } else {
       this.setState({ updating: true });
+
       this.updateItem();
     }
   }
@@ -32,12 +33,16 @@ export default class ItemDetails extends Component {
       return;
     }
     getData(itemId).then(item => {
-      this.setState({ item, image: getImageURL(item), updating: false });
+      this.setState({ item, image: getImageURL(item) });
+      this.setState({ updating: false });
     });
   };
 
   render() {
     const { item, updating, image } = this.state;
+    if (updating) {
+      return <Spinner />;
+    }
     if (!item) {
       return (
         <div className="item-details card">
@@ -45,10 +50,8 @@ export default class ItemDetails extends Component {
         </div>
       );
     }
-    if (updating) {
-      return <Spinner />;
-    }
-    const { name, gender, birthYear, eyeColor } = item;
+
+    const { name } = item;
     return (
       <div className="item-details card">
         <img alt="item" className="item-image" src={image} />
