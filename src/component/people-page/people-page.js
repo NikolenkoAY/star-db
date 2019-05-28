@@ -10,12 +10,19 @@ import Row from "../row";
 
 import ErrorBoundry from "../error-boundry";
 
+
+
+import { PersonList } from "../sw-components";
+
+import { PersonDetails } from "../sw-components";
+
+
 export default class PeoplePage extends Component {
   swapiService = new SwapiService();
 
   state = {
     selectedItem: null,
-    selectedItemS: null
+
   };
 
   onItemSelected = id => {
@@ -23,59 +30,44 @@ export default class PeoplePage extends Component {
       selectedItem: id
     });
   };
-  onItemSelectedS = id => {
-    this.setState({
-      selectedItemS: id
-    });
-  };
+
   render() {
-    const itemList = (
-      <ItemList
-        onItemSelected={this.onItemSelected}
-        renderItem={e => `${e.name}-${e.birthYear}`} //можно рендер, а можно ниже, как чилдрен
-      >
-        {e => e.name}
-      </ItemList>
-    );
-
-    const itemDetails = (
-      <ErrorBoundry>
-        <ItemDetails
-          itemId={this.state.selectedItem}
-          getData={this.swapiService.getPerson}
-          getImageURL={this.swapiService.getPersonImage}
-        >
-          <Record field="gender" label="Gender" />
-          <Record field="birthYear" label="Birth Year" />
-        </ItemDetails>
-      </ErrorBoundry>
-    );
-    /*
-    const starshipList = (
-      <ItemList
-        onItemSelected={this.onItemSelectedS}
-        getData={this.swapiService.getAllStarships}
-        renderItem={e => `${e.name}-${e.birthYear}`} //можно рендер, а можно ниже, как чилдрен
-      >
-        {({ name }) => name}
-      </ItemList>
-    );
-
-    const starshipDetails = (
-      <ItemDetails
-        itemId={this.state.selectedItemS}
-        getData={this.swapiService.getStarship}
-        getImageURL={this.swapiService.getStarshipImage}
-      >
-        <Record field="model" label="Model" />
-        <Record field="length" label="Length" />
-        <Record field="costInCredits" label="Cost" />
-      </ItemDetails>
-    );
-*/
+    /*   const itemList = (
+         <ItemList
+           onItemSelected={this.onItemSelected}
+           renderItem={e => e.name} //можно рендер, а можно ниже, как чилдрен
+         >
+           {e => e.name}
+         </ItemList>
+       );
+   
+       const itemDetails = (
+         <ErrorBoundry>
+           <ItemDetails
+             itemId={this.state.selectedItem}
+             getData={this.swapiService.getPerson}
+             getImageURL={this.swapiService.getPersonImage}
+           >
+             <Record field="gender" label="Gender" />
+             <Record field="birthYear" label="Birth Year" />
+           </ItemDetails>
+         </ErrorBoundry>
+       );
+   */
     return (
       <div>
-        <Row left={itemList} right={itemDetails} />
+        <Row
+          left={
+            <ErrorBoundry>
+              <PersonList onItemSelected={this.onItemSelected}>
+                {({ name }) => <span>{name}</span>}
+              </PersonList>
+            </ErrorBoundry>}
+          right={
+            <ErrorBoundry>
+              <PersonDetails itemId={this.state.selectedItem}>
+              </PersonDetails>
+            </ErrorBoundry>} />
       </div>
     );
   }

@@ -2,17 +2,25 @@ import React, { Component } from "react";
 
 import Header from "../header";
 import RandomPlanet from "../random-planet";
-//import PeoplePage from "../people-page/people-page";
+import PeoplePage from "../people-page/people-page";
 import ErrorIndicator from "../error-indicator";
 import SwapiService from "../../services/swapi-services";
 import ErrorBoundry from "../error-boundry";
+import Row from "../row";
 
 
 import {
   PersonList,
   PlanetList,
   StarshipList
-} from "../sw-components"
+} from "../sw-components";
+
+import {
+  PersonDetails,
+  PlanetDetails,
+  StarshipDetails
+} from "../sw-components";
+
 
 import "./app.css";
 
@@ -36,16 +44,13 @@ export default class App extends Component {
         <ErrorBoundry>
           <Header />
           <RandomPlanet />
-          <PersonList>
-            {({name})=><span>{name}</span>}
-          </PersonList>
-          <PlanetList>
-            {({name})=><span>{name}</span>}
-          </PlanetList>
-          <StarshipList>
-            {({name})=><span>{name}</span>}
-          </StarshipList>
+          <PeoplePage />
+
+          
         </ErrorBoundry>
+
+
+        
       </div>
     );
   }
@@ -55,7 +60,7 @@ export default class App extends Component {
 <PeoplePage />
         <PlanetDetails />
         <StarshipDetails />
-         <PeoplePage />
+         
  <Row left={personDetails} right={starshipDetails} />
 
         */
