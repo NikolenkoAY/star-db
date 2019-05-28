@@ -10,19 +10,15 @@ import Row from "../row";
 
 import ErrorBoundry from "../error-boundry";
 
-
-
 import { PersonList } from "../sw-components";
 
 import { PersonDetails } from "../sw-components";
-
 
 export default class PeoplePage extends Component {
   swapiService = new SwapiService();
 
   state = {
-    selectedItem: null,
-
+    selectedItem: null
   };
 
   onItemSelected = id => {
@@ -59,15 +55,15 @@ export default class PeoplePage extends Component {
         <Row
           left={
             <ErrorBoundry>
-              <PersonList onItemSelected={this.onItemSelected}>
-                {({ name }) => <span>{name}</span>}
-              </PersonList>
-            </ErrorBoundry>}
+              <PersonList onItemSelected={this.onItemSelected} />
+            </ErrorBoundry>
+          }
           right={
             <ErrorBoundry>
-              <PersonDetails itemId={this.state.selectedItem}>
-              </PersonDetails>
-            </ErrorBoundry>} />
+              <PersonDetails itemId={this.state.selectedItem} />
+            </ErrorBoundry>
+          }
+        />
       </div>
     );
   }

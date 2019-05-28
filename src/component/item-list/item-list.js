@@ -24,6 +24,4 @@ const ItemList = props => {
   return <ul className="item-list list-group">{item}</ul>;
 };
 
-
-
 export default ItemList;
