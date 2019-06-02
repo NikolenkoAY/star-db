@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 
-import ItemList from "../item-list";
-import ItemDetails, { Record } from "../item-details";
-
 import "./people-page.css";
 
 import SwapiService from "../../services/swapi-services";
