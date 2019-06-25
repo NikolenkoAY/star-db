@@ -25,28 +25,6 @@ export default class PeoplePage extends Component {
   };
 
   render() {
-    /*   const itemList = (
-         <ItemList
-           onItemSelected={this.onItemSelected}
-           renderItem={e => e.name} //можно рендер, а можно ниже, как чилдрен
-         >
-           {e => e.name}
-         </ItemList>
-       );
-   
-       const itemDetails = (
-         <ErrorBoundry>
-           <ItemDetails
-             itemId={this.state.selectedItem}
-             getData={this.swapiService.getPerson}
-             getImageURL={this.swapiService.getPersonImage}
-           >
-             <Record field="gender" label="Gender" />
-             <Record field="birthYear" label="Birth Year" />
-           </ItemDetails>
-         </ErrorBoundry>
-       );
-   */
     return (
       <div>
         <Row

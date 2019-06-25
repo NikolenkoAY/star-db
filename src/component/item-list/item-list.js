@@ -8,7 +8,6 @@ const ItemList = props => {
   const item = data.map(item => {
     const { id } = item;
 
-    // const label = this.props.renderItem(item); // функция передана через пропс
     const label = renderLabel(item); // это через чилдрен
     return (
       <li

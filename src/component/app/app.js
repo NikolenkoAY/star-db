@@ -5,30 +5,37 @@ import RandomPlanet from "../random-planet";
 import PeoplePage from "../people-page/people-page";
 import ErrorIndicator from "../error-indicator";
 import SwapiService from "../../services/swapi-services";
+import DummySwapiService from "../../services/dummy-swapi-service";
+
 import ErrorBoundry from "../error-boundry";
-//import Row from "../row";
 
 import { SwapiServiceProvider } from "../swapi-service-context";
-/*
-import { PersonList, PlanetList, StarshipList } from "../sw-components";
 
-import {
-  PersonDetails,
-  PlanetDetails,
-  StarshipDetails
-} from "../sw-components";*/
+import { PersonDetails } from "../sw-components";
 
 import "./app.css";
 
 export default class App extends Component {
-  swapiService = new SwapiService();
-
   state = {
-    hasError: false
+    hasError: false,
+    swapiService: new DummySwapiService()
   };
   componentDidCatch() {
     this.setState({ hasError: true });
   }
+
+  onServiceChange = () => {
+    this.setState(({ swapiService }) => {
+      const Service =
+        swapiService instanceof SwapiService ? DummySwapiService : SwapiService;
+
+      console.log(Service.name);
+
+      return {
+        swapiService: new Service()
+      };
+    });
+  };
 
   render() {
     if (this.state.hasError) {
@@ -38,9 +45,10 @@ export default class App extends Component {
     return (
       <div className="container">
         <ErrorBoundry>
-          <SwapiServiceProvider value={this.swapiService}>
-            <Header />
+          <SwapiServiceProvider value={this.state.swapiService}>
+            <Header onServiceChange={this.onServiceChange} />
             <RandomPlanet />
+
             <PeoplePage />
           </SwapiServiceProvider>
         </ErrorBoundry>
@@ -48,12 +56,3 @@ export default class App extends Component {
     );
   }
 }
-/*   
-<RandomPlanet />
-<PeoplePage />
-        <PlanetDetails />
-        <StarshipDetails />
-         
- <Row left={personDetails} right={starshipDetails} />
-
-        */

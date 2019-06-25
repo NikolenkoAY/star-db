@@ -17,11 +17,13 @@ export default class ItemDetails extends Component {
   componentDidMount() {
     this.updateItem();
   }
-  componentDidUpdate(prevProps) {
-    if (this.props.itemId === prevProps.itemId) {
-    } else {
-      this.setState({ updating: true });
 
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.itemId !== prevProps.itemId ||
+      this.props.getData !== prevProps.getData ||
+      this.props.getImageURL !== prevProps.getImageURL
+    ) {
       this.updateItem();
     }
   }
@@ -34,7 +36,6 @@ export default class ItemDetails extends Component {
     }
     getData(itemId).then(item => {
       this.setState({ item, image: getImageURL(item) });
-      this.setState({ updating: false });
     });
   };
 
