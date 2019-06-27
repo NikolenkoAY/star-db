@@ -2,7 +2,10 @@ import React, { Component } from "react";
 
 import Header from "../header";
 import RandomPlanet from "../random-planet";
-import PeoplePage from "../people-page/people-page";
+import {
+  PeoplePage, PlanetList,
+  StarshipPage
+} from "../pages";
 import ErrorIndicator from "../error-indicator";
 import SwapiService from "../../services/swapi-services";
 import DummySwapiService from "../../services/dummy-swapi-service";
@@ -11,14 +14,13 @@ import ErrorBoundry from "../error-boundry";
 
 import { SwapiServiceProvider } from "../swapi-service-context";
 
-import { PersonDetails } from "../sw-components";
 
 import "./app.css";
 
 export default class App extends Component {
   state = {
     hasError: false,
-    swapiService: new DummySwapiService()
+    swapiService: new SwapiService()
   };
   componentDidCatch() {
     this.setState({ hasError: true });
@@ -48,8 +50,9 @@ export default class App extends Component {
           <SwapiServiceProvider value={this.state.swapiService}>
             <Header onServiceChange={this.onServiceChange} />
             <RandomPlanet />
-
             <PeoplePage />
+            <PlanetList />
+            <StarshipPage />
           </SwapiServiceProvider>
         </ErrorBoundry>
       </div>

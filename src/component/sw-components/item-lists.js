@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import ItemList from "../item-list";
 import { withData, withSwapiService } from "../hoc-helpers";
 
@@ -8,7 +8,7 @@ const withChildFunction = (Wrapper, fn) => {
   };
 };
 
-const renderName = ({ name }) => <span>{name}</span>;
+const renderName = (e) => <span>{e.name }</span>;
 
 const mapPersonMethodsToProps = swapiService => {
   return {

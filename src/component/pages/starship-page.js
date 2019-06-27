@@ -1,18 +1,13 @@
 import React, { Component } from "react";
 
-import "./people-page.css";
-
-import SwapiService from "../../services/swapi-services";
 import Row from "../row";
-
 import ErrorBoundry from "../error-boundry";
+import {StarshipDetails, StarshipList } from "../sw-components";
+ 
+import "../pages/pages.css";
 
-import { PersonList } from "../sw-components";
+export default class StarshipPage extends Component {
 
-import { PersonDetails } from "../sw-components";
-
-export default class PeoplePage extends Component {
-  swapiService = new SwapiService();
 
   state = {
     selectedItem: null
@@ -25,17 +20,18 @@ export default class PeoplePage extends Component {
   };
 
   render() {
+      const {selectedItem} =this.state;
     return (
       <div>
         <Row
           left={
             <ErrorBoundry>
-              <PersonList onItemSelected={this.onItemSelected} />
+              <StarshipList onItemSelected={this.onItemSelected} />
             </ErrorBoundry>
           }
           right={
             <ErrorBoundry>
-              <PersonDetails itemId={this.state.selectedItem} />
+              <StarshipDetails itemId={selectedItem} />
             </ErrorBoundry>
           }
         />
