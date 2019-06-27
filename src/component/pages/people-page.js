@@ -2,13 +2,11 @@ import React, { Component } from "react";
 
 import Row from "../row";
 import ErrorBoundry from "../error-boundry";
-import {PersonDetails, PersonList } from "../sw-components";
- 
+import { PersonDetails, PersonList } from "../sw-components";
+
 import "../pages/pages.css";
 
 export default class PeoplePage extends Component {
-
-
   state = {
     selectedItem: null
   };
@@ -20,7 +18,7 @@ export default class PeoplePage extends Component {
   };
 
   render() {
-      const {selectedItem} =this.state;
+    const { selectedItem } = this.state;
     return (
       <div>
         <Row

@@ -2,10 +2,7 @@ import React, { Component } from "react";
 
 import Header from "../header";
 import RandomPlanet from "../random-planet";
-import {
-  PeoplePage, PlanetList,
-  StarshipPage
-} from "../pages";
+import { PeoplePage, PlanetList, StarshipPage } from "../pages";
 import ErrorIndicator from "../error-indicator";
 import SwapiService from "../../services/swapi-services";
 import DummySwapiService from "../../services/dummy-swapi-service";
@@ -13,7 +10,6 @@ import DummySwapiService from "../../services/dummy-swapi-service";
 import ErrorBoundry from "../error-boundry";
 
 import { SwapiServiceProvider } from "../swapi-service-context";
-
 
 import "./app.css";
 

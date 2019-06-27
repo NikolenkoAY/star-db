@@ -8,7 +8,7 @@ const withChildFunction = (Wrapper, fn) => {
   };
 };
 
-const renderName = (e) => <span>{e.name }</span>;
+const renderName = ({ name }) => <span>{name}</span>;
 
 const mapPersonMethodsToProps = swapiService => {
   return {

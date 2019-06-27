@@ -23,4 +23,8 @@ const ItemList = props => {
   return <ul className="item-list list-group">{item}</ul>;
 };
 
+ItemList.defaultProps = {
+  onItemSelected: () => {}
+}; // defaultProps for methods
+
 export default ItemList;
