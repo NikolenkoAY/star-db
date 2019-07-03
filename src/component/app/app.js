@@ -48,8 +48,9 @@ export default class App extends Component {
             <Router>
               <Header onServiceChange={this.onServiceChange} />
               <RandomPlanet updateInterval={3000} />
-              <Route path="/people" component={PeoplePage} />
+              <Route path="/" render={() => <h2>Welcome to StarDB</h2>} exact />
 
+              <Route path="/people" component={PeoplePage} />
               <Route path="/planets" component={PlanetPage} />
               <Route path="/starships" component={StarshipPage} />
             </Router>
