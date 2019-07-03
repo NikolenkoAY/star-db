@@ -50,8 +50,8 @@ export default class App extends Component {
               <RandomPlanet updateInterval={3000} />
               <Route path="/people" component={PeoplePage} />
 
-              <Route path="/planet" component={PlanetPage} />
-              <Route path="/starship" component={StarshipPage} />
+              <Route path="/planets" component={PlanetPage} />
+              <Route path="/starships" component={StarshipPage} />
             </Router>
           </SwapiServiceProvider>
         </ErrorBoundry>
