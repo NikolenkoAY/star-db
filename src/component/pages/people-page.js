@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
+import { withRouter } from "react-router-dom";
 
 import Row from "../row";
 import ErrorBoundry from "../error-boundry";
@@ -6,34 +7,28 @@ import { PersonDetails, PersonList } from "../sw-components";
 
 import "../pages/pages.css";
 
-export default class PeoplePage extends Component {
-  state = {
-    selectedItem: null
-  };
+const PeoplePage = ({history, match}) => {
 
-  onItemSelected = id => {
-    this.setState({
-      selectedItem: id
-    });
-  };
+    const {id} = match.params;
 
-  render() {
-    const { selectedItem } = this.state;
     return (
       <div>
         <Row
           left={
             <ErrorBoundry>
-              <PersonList onItemSelected={this.onItemSelected} />
+              <PersonList onItemSelected={itemId => history.push(itemId)} />
             </ErrorBoundry>
           }
           right={
             <ErrorBoundry>
-              <PersonDetails itemId={selectedItem} />
+              <PersonDetails itemId={id} />
             </ErrorBoundry>
           }
         />
       </div>
     );
-  }
+
 }
+
+
+export default  withRouter(PeoplePage);
