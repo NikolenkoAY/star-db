@@ -7,28 +7,28 @@ import { PersonDetails, PersonList } from "../sw-components";
 
 import "../pages/pages.css";
 
-const PeoplePage = ({history, match}) => {
+const PeoplePage = ({ history, match }) => {
+  const { id } = match.params;
 
-    const {id} = match.params;
+  return (
+    <div>
+      <Row
+        left={
+          <ErrorBoundry>
+            <PersonList onItemSelected={itemId => history.push(itemId)} />
+          </ErrorBoundry>
+        }
+        right={
+          <ErrorBoundry>
+            <PersonDetails itemId={id} />
+          </ErrorBoundry>
+        }
+      />
+    </div>
+  );
+};
+PeoplePage.defaultProps = {
+  id: 5
+}; // defaultProps for methods
 
-    return (
-      <div>
-        <Row
-          left={
-            <ErrorBoundry>
-              <PersonList onItemSelected={itemId => history.push(itemId)} />
-            </ErrorBoundry>
-          }
-          right={
-            <ErrorBoundry>
-              <PersonDetails itemId={id} />
-            </ErrorBoundry>
-          }
-        />
-      </div>
-    );
-
-}
-
-
-export default  withRouter(PeoplePage);
+export default withRouter(PeoplePage);
